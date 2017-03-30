@@ -31,7 +31,7 @@
 	# cp config.yaml.example config.yaml
 	# vi config.yaml
 	
-Sửa tham số : 
+Thiết lập tham số : 
 
 - `es_host` : địa chỉ của Elasticsearch 
 
@@ -45,5 +45,64 @@ ElastAlert lưu thông tin và metadata về các truy vấn và các alert củ
 	
 ### Tạo một rule 
 
+Ví dụ `any_rule.yaml`:
 
+	# (Optional)
+	# Elasticsearch host
+	es_host: 192.168.169.136
+
+	# (Optional)
+	# Elasticsearch port
+	es_port: 9200
+
+	# (OptionaL) Connect with SSL to Elasticsearch
+	use_ssl: False
+
+	# (Optional) basic-auth username and password for Elasticsearch
+	#es_username: someusername
+	#es_password: somepassword
+
+	# Rule name, must be unique
+	name: ClamAV rule
+
+	# (Required)
+	# Type of alert.
+	type: any
+
+	# (Required)
+	# Index to search, wildcard supported
+	index: clamav-*
+
+	summary_table_fields:
+	  - value
+
+
+	filter:
+	- bool:
+		must_not:
+		  - term:
+			  value.keyword: "0"
+		must:
+		  - term:
+			  content.keyword: "Infected files"
+
+	# (Required)
+	# The alert is use when a match is found
+	alert:
+	- "email"
+
+	# (required, email specific)
+	# a list of email addresses to send alerts to
+	email:
+	- "locvx1234@gmail.com"
+
+### Test file rule 
+
+	# elastalert-test-rule example_rules/any_rule.yaml
+
+### Running ElastAlert
+
+	# python -m elastalert.elastalert --verbose --rule any_rule.yaml
+
+## Script
 

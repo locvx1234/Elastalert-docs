@@ -58,8 +58,14 @@ Các tham số và kiểu giá trị tương ứng, [xem thêm ... ](https://ela
 
 #### Test file rule 
 	
-	# elastalert-test-rule path/to/file_rule.yaml 
+	$ elastalert-test-rule example_rules/example_frequency.yaml
 
+Nếu không có thêm đối số nào, nó sẽ chạy ElastAlert trong 24h trước, và in ra bất kỳ cảnh báo nào có thể xảy ra. 
+
+Xác định sử dụng một file config khác, thêm option `config` 
+
+	$ elastalert-test-rule –config <path-to-config-file> example_rules/example_frequency.yaml
+	
 
 <a name="RuleType"></a>
 #### Rule Types 
@@ -112,10 +118,48 @@ Một trường option :
 
 `timeframe` : Thời gian maximum giữa các thay đổi. Sau khoảng thời gian này, Elastalert sẽ bỏ qua những giá trị cũ của trường `compare_key`
 
+###### Frequency
 
+File cấu hình có sẵn : `example_rules/example_frequency.yaml`
+
+`frequency` : rule này sẽ match khi có ít nhất một số sự kiện nhất định trong một frame thời gian được đưa ra.  
+
+Rule này yêu cầu thêm 2 option :
+
+`num_events` : số sự kiện sẽ kích hoạt cảnh báo 
+
+`timeframe` : thời gian `num_events` phải xảy ra 
+
+###### Các rule xây dựng sẵn khác 
+
+Spike
+
+Flatline
+
+New Term
+
+Cardinality
+
+Metric Aggregation
 
 
 <a name="Alerts"></a>
 #### Alerts 
 
+Mỗi rule có thể có một số alert đi kèm. Để set alert cho một rule, đặt tên của alert, hoặc một list tên alert
 
+Ví dụ 
+
+	alert: email
+	
+hoặc 
+
+	alert:
+	- email
+	- jira
+
+	
+Tiêu đề email có thể sửa đổi bằng `alert_subject`
+
+	alert_subject: "Issue {0} occurred at {1}"
+	

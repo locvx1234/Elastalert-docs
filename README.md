@@ -2,7 +2,7 @@
 
 ## Overview
 
-Elastalert là một framework để cảnh báo sự thay đổi bất thường, đột ngột từ dữ liệu Elasticsearch.
+Elastalert là một framework để cảnh báo sự thay đổi bất thường, đột ngột của dữ liệu Elasticsearch.
 
 Nó kết hợp với Elasticsearch theo 2 thành phần chính là `rule type` và `alert`
 
@@ -20,7 +20,7 @@ Tùy thuộc mục đích, ta có thể sử dụng các rule được xây dự
 - `change` type : phù hợp khi một trường có 2 giá trị khác nhau trong một khoảng thời gian
 
 
-Elastalert hỗ trợ alert theo nhiều hình thức khác nhau : 
+ElastAlert hỗ trợ alert theo nhiều hình thức khác nhau : 
 
 - Command
 - Email
@@ -35,4 +35,8 @@ Elastalert hỗ trợ alert theo nhiều hình thức khác nhau :
 
 ## Deployment
 
+[See more ...](https://github.com/locvx1234/Elastalert-docs/blob/master/Deployment.md)
+
 ## Research
+
+[See more ...](https://github.com/locvx1234/Elastalert-docs/blob/master/Research.md)
