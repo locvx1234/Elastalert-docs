@@ -33,3 +33,9 @@ pip install "elasticsearch>=5.0.0"
 
 cp config.yaml.example config.yaml
 
+echo -n "IP elasticsearch: "
+read ip_es
+sed -i 's/elasticsearch.example.com/'"$ip_es"'/g' config.yaml 
+
+elastalert-create-index
+
