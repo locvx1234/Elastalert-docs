@@ -75,7 +75,7 @@ Ví dụ `any_rule.yaml`:
 
 	summary_table_fields:
 	  - value
-
+	  - logsource
 
 	filter:
 	- bool:
@@ -90,12 +90,16 @@ Ví dụ `any_rule.yaml`:
 	# The alert is use when a match is found
 	alert:
 	- "email"
-
+	- "slack"
+	
 	# (required, email specific)
 	# a list of email addresses to send alerts to
 	email:
 	- "locvx1234@gmail.com"
 
+	slack_webhook_url:
+	- "https://hooks.slack.com/services/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"
+	
 ### Test file rule 
 
 	# elastalert-test-rule example_rules/any_rule.yaml
