@@ -159,7 +159,106 @@ hoặc
 	- jira
 
 	
-Tiêu đề email có thể sửa đổi bằng `alert_subject`
+Tiêu đề alert có thể sửa đổi bằng `alert_subject`
 
-	alert_subject: "Issue {0} occurred at {1}"
+	alert_subject: "Virus detection !"
 	
+###### Email 
+
+Alert sẽ gửi tới một email. Nó kết nối tới một smtp server được thiết lập bằng `stmp_host` hoặc mặc định là localhost. 
+
+Alert này cần thêm 1 option:
+
+`email` : Một địa chỉ email hoặc một list email nhận alert 
+
+
+
+###### Slack 
+
+Slack alerter sẽ gửi thông báo về channel Slack. Định dạng alert gửi về giống các loại alert khác.
+
+Alerter này cần một option: 
+
+`slack_webhook_url` : url webhook để xác định channel muốn nhận alert. Truy cập https://XXXXX.slack.com/services/new/incoming-webhook và chọn channel bằng cách click 'Add Incoming Webhooks Integration'. Copy URL và đặt vào làm giá trị cho đối số này.
+
+
+###### Một số các alert khác 
+
+[See more ...](https://elastalert.readthedocs.io/en/latest/ruletypes.html#alerts)
+
+## Viết filter cho rule 
+
+Filter sử dụng các rule dựa trên [ Elasticsearch query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
+
+#### Các loại filter chung 
+
+###### query_string
+
+	filter:
+	- query:
+		query_string:
+		  query: "username: bob"
+	- query:
+		query_string:
+		  query: "_type: login_logs"
+	- query:
+		query_string:
+		  query: "field: value OR otherfield: othervalue"
+	- query:
+		query_string:
+		   query: "this: that AND these: those"
+
+
+###### term
+
+	filter:
+	- term:
+		name_field: "bob"
+	- term:
+		_type: "login_logs"		   
+		
+		
+###### terms
+
+Kết hợp nhiều term filter 
+
+	filter:
+	- terms:
+		field: ["value1", "value2"]
+		
+###### wildcard
+
+		filter:
+	- query:
+		wildcard:
+		  field: "foo*bar"		
+	
+###### range
+
+	filter:
+	- range:
+		status_code:
+		  from: 500
+		  to: 599
+
+
+###### Negation, and, or
+
+	filter:
+	- or:
+		- term:
+			field: "value"
+		- wildcard:
+			field: "foo*bar"
+		- and:
+			- not:
+				term:
+				  field: "value"
+			- not:
+				term:
+				  _type: "something"
+
+Cú pháp query đối với Elastic 5.0 trở đi có sự [thay đổi](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking_50_search_changes.html#_deprecated_queries_removed)
+		
+Với truy vấn bool : https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html 
+		
