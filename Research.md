@@ -1,4 +1,13 @@
+# Các nội dung chính 
 
+[1. Các tham số trong file config](#config)
+
+[2. Các loại rule và cấu hình tùy chọn ](#rule)
+
+[3. Viết filter cho rule ](#filter)
+
+
+<a name="config"></a>
 ## Các tham số trong file config (`config.yaml`)
 
 `rules_folder` : folder chứa file cấu hình. Elastalert sẽ load các file .yaml từ thư mục này.
@@ -25,7 +34,7 @@
 
 `alert_time_limit` : thời gian cửa sổ gửi cảnh báo không thành công
 
-
+<a name="rule"></a>
 ## Các loại rule và cấu hình tùy chọn 
 
 NOTE : Tất cả các "time" theo dạng: `unit: X`. Unit là một trong các loại weeks, days, hours, minutes hoặc seconds.
@@ -186,6 +195,7 @@ Alerter này cần một option:
 
 [See more ...](https://elastalert.readthedocs.io/en/latest/ruletypes.html#alerts)
 
+<a name="filter"></a>
 ## Viết filter cho rule 
 
 Filter sử dụng các rule dựa trên [ Elasticsearch query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
