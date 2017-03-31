@@ -110,3 +110,4 @@ Ví dụ `any_rule.yaml`:
 
 ## Script
 
+https://github.com/locvx1234/Elastalert-docs/blob/master/elastalert.sh
